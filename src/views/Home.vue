@@ -4,35 +4,38 @@
     <a-layout-sider v-model:collapsed="collapsed" collapsible>
       <div class="logo" />
 			<!-- 菜单 -->
-      <a-menu theme="dark" v-model:selectedKeys="selectedKeys" mode="inline">
-        <a-menu-item key="1">
+      <a-menu theme="dark" 
+			v-model:selectedKeys="selectedKeys" 
+			mode="inline"
+			@click="memuClick"
+			>
+        <a-menu-item key="home">
           <pie-chart-outlined />
-          <span>Option 1</span>
+          <span>工作台</span>
         </a-menu-item>
-        <a-menu-item key="2">
+        <a-menu-item key="login">
           <desktop-outlined />
-          <span>Option 2</span>
+          <span>预留</span>
         </a-menu-item>
         <a-sub-menu key="sub1">
           <template #title>
             <span>
               <user-outlined />
-              <span>User</span>
+              <span>基础数据</span>
             </span>
           </template>
-          <a-menu-item key="3">Tom</a-menu-item>
-          <a-menu-item key="4">Bill</a-menu-item>
-          <a-menu-item key="5">Alex</a-menu-item>
+          <a-menu-item key="3">帐套管理</a-menu-item>
+          <a-menu-item key="4">产品管理</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">
           <template #title>
             <span>
               <team-outlined />
-              <span>Team</span>
+              <span>用户管理</span>
             </span>
           </template>
-          <a-menu-item key="6">Team 1</a-menu-item>
-          <a-menu-item key="8">Team 2</a-menu-item>
+          <a-menu-item key="6">用户中心</a-menu-item>
+          <a-menu-item key="8">岗位定义</a-menu-item>
         </a-sub-menu>
         <a-menu-item key="9">
           <file-outlined />
@@ -59,6 +62,7 @@
   </a-layout>
 </template>
 <script lang="ts">
+import { useRoute, useRouter } from 'vue-router'
 import {
   PieChartOutlined,
   DesktopOutlined,
@@ -81,6 +85,19 @@ export default defineComponent({
       selectedKeys: ref<string[]>(['1']),
     };
   },
+	setup(){
+		let route = useRoute();
+		let router = useRouter();
+		const memuClick = (keyPath: any) => {
+			router.push({
+				path: '/' + keyPath.key
+			})
+		};
+		return {
+			memuClick,
+		}
+	},
+	
 });
 </script>
 <style>
